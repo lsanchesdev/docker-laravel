@@ -1,0 +1,56 @@
+FROM php:7.0.29-apache-jessie
+
+RUN apt-get update
+RUN apt-get install -y apt-utils
+RUN apt-get install -y libmcrypt-dev
+RUN apt-get install -y git
+RUN apt-get install -y zip
+RUN apt-get install -y unzip
+RUN apt-get install -y net-tools
+RUN apt-get install -y tcpdump
+RUN apt-get install -y libfreetype6-dev
+RUN apt-get install -y libjpeg62-turbo-dev
+RUN apt-get install -y libmcrypt-dev
+RUN apt-get install -y libpng12-dev
+RUN apt-get install -y libedit-dev
+RUN apt-get install -y libedit2
+RUN apt-get install -y g++
+RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y libgmp-dev
+RUN apt-get install -y libicu-dev
+
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install -j$(nproc) gd
+RUN apt-get autoremove -y
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN docker-php-ext-install -j$(nproc) mcrypt mysqli bcmath
+
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_enable=0" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_output_dir=\"/var/www/html\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get install -y git
+RUN apt-get install -y zip
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install gmp
+
+RUN apt-get update
+
+RUN apt-get install -y nano
+RUN apt-get install -y htop
+RUN a2enmod rewrite
+RUN a2enmod expires
+RUN a2enmod deflate
+RUN a2enmod alias

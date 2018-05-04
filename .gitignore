@@ -1,0 +1,5 @@
+mysql-data
+src/application/vendor
+codealike.json
+.idea
+.env
