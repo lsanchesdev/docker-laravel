@@ -55,7 +55,6 @@ RUN a2enmod expires
 RUN a2enmod deflate
 RUN a2enmod alias
 
+RUN apt-get install -y sudo
+
 WORKDIR /var/www/
-#COPY composer.json composer.lock ./
-#RUN composer install --no-interaction
-COPY ../src/ /var/www/
