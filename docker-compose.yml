@@ -3,18 +3,18 @@ services:
   web:
     container_name: laravel_web
     build:
-      context: ./docker/php
+      context: ./
       dockerfile: php.docker
     ports:
-      - "80:80"
+      - "9090:80"
     links:
       - db
     volumes:
       - ./src/:/var/www
       - ./src/public:/var/www/html
     networks:
-      laranet:
-        ipv4_address: 172.25.11.101
+      laranet2:
+        ipv4_address: 172.25.12.103
   db:
     container_name: laravel_mysql
     privileged: true
@@ -26,23 +26,23 @@ services:
       MYSQL_USER: larauser
       MYSQL_PASSWORD: larapass
     ports:
-      - 3306:3306
+      - 9091:3306
     volumes:
       - ./mysql-data:/var/lib/mysql
     networks:
-      laranet:
-        ipv4_address: 172.25.11.102
+      laranet2:
+        ipv4_address: 172.25.12.102
   phpmyadmin:
     container_name: laravel_phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
-      - 8081:80
+      - 9092:80
     environment:
       - PMA_ARBITRARY=1
 networks:
-    laranet:
+    laranet2:
       driver: bridge
       ipam:
         driver: default
         config:
-          - subnet: 172.25.11.0/24
+          - subnet: 172.25.12.0/24
