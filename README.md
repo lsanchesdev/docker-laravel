@@ -10,7 +10,7 @@ Environment to run Laravel with Docker.
 
 To run:
 ```shell
-docker-compose up
+docker-compose up -d
 ```
 
 Once docker is up (only the first time):
