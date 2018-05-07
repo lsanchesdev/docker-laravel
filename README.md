@@ -2,6 +2,8 @@
 
 Environment to run Laravel with Docker.
 
+![Version](https://img.shields.io/badge/Version-v1.0.2-green.svg)
+
 ### Requirements
 * [Docker v18.03.0-ce](https://docs.docker.com/install/)
 * [Docker Compose v1.20.1](https://docs.docker.com/install/)
