@@ -29,4 +29,7 @@ docker-compose stop
 * [PHPMyAdmin - http://localhost:9092/](http://localhost:9092/)
 
 #### Errors? Improvements
-DISCLAIMER: Use it at your own risk.
+contato@leandrosanches.com.br
+
+#### DISCLAIMER
+Use it at your own risk.
