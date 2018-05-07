@@ -23,5 +23,10 @@ To stop:
 docker-compose stop
 ```
 
+### Testing
+
+* [Laravel - http://localhost:9090/](http://localhost:9090/)
+* [PHPMyAdmin - http://localhost:9092/](http://localhost:9092/)
+
 #### Errors? Improvements
 DISCLAIMER: Use it at your own risk.
